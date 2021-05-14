@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import Service from "./Service";
 
 function LoginForm() {
   const [tbldata, setTbldata] = useState([]);
+  const [reload, setReload] = useState(false);
 
   const service = new Service();
 
@@ -18,7 +19,7 @@ function LoginForm() {
         console.log(error);
       }
     );
-  }, []);
+  }, [reload]);
 
   return (
     <>
@@ -30,27 +31,61 @@ function LoginForm() {
       <Row>
         <Col></Col>
         <Col xs="auto">
-          <form>
+          {/* <form onSubmit={(e)=>{
+            let form=e.target
+            let data={name:form.name.va
+          }}>
             <div className="form-group">
-              <label htmlFor="name">
+              <label >
                 <b>Name</b>
               </label>
               <input type="text" name="name" id="name" />
             </div>
             <div className="form-group">
-              <label htmlFor="desc">
+              <label >
                 <b>Description</b>
               </label>
               <input type="text" name="desc" id="desc" />
             </div>
             <div className="form-group">
-              <label htmlFor="price">
+              <label >
                 <b>Price</b>
               </label>
               <input type="text" name="price" id="price" />
             </div>
-            <Button variant="primary">Save</Button>
-          </form>
+            <Button variant="primary" type="submit">Save</Button>
+          </form> */}
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              let form = e.target;
+              let data = {
+                name: form.formBasicName.value,
+                Description: form.formBasicDescription.value,
+                price: form.formBasicPrice.value,
+              };
+              service.addItems(data).then(() => {
+                setReload(!reload);
+              });
+              console.log(form);
+            }}
+          >
+            <Form.Group controlId="formBasicName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+            <Form.Group controlId="formBasicDescription">
+              <Form.Label>Description</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+            <Form.Group controlId="formBasicPrice">
+              <Form.Label>Price</Form.Label>
+              <Form.Control type="text" />
+              <Button variant="primary" type="submit">
+                Save
+              </Button>
+            </Form.Group>
+          </Form>
         </Col>
         <Col></Col>
       </Row>
@@ -73,7 +108,9 @@ function LoginForm() {
                 <FontAwesomeIcon
                   icon={faTrash}
                   onClick={() => {
-                    alert("test");
+                    service.deleteItems(item.id).then(() => {
+                      setReload(!reload);
+                    });
                   }}
                 />
                 <FontAwesomeIcon icon={faPencilAlt} />
