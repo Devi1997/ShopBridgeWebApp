@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+  font-family: "calibri";
+  padding-top: 5px;
+}
+.main-div {
+  background: #2b436f;
+  padding: 12px 8px;
+  color: #fff;
+  font-family: "calibri";
+  font-weight: 600;
+  text-align: left;
+  padding-left: 8rem;
+  font-size: 24px;
+}
+.form-inner h2,
+.form-inner-second-grp h2 {
+  text-align: left;
+  padding-left: 8rem;
+}
+.form-inner h2:first-child,
+.form-inner-second-grp h2:first-child {
+  color: #706a6a;
+  font-weight: 600;
+}
+.form-inner h2:nth-child(2),
+.form-inner-second-grp h2:nth-child(2) {
+  font-size: 1.1em;
+  padding-left: 8rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e7eaee;
+  color: #788586;
+  font-weight: 400;
+}
+/* input {
+  height: 25px;
+  border: 1px solid #e7eaee;
+  outline: none;
+  position: static;
+  border-radius: 4px;
+  text-align: left;
+} */
+.form-group input[id$="file"] {
+  border: none;
+}
+/* button {
+  background-color: #5ab95c;
+  border: 1px solid #5ab95c !important;
+  outline: none;
+  border-radius: 6px;
+  padding: 4px 2px;
+  width: 3rem;
+  margin-left: 35rem;
+  color: white;
+} */
+.form-group label {
+  /* padding-left: 35rem; */
+  text-align: center !important;
+  align-items: center;
+}
+[id$="name"],
+[id$="desc"],
+[id$="price"],
+[id$="file"] {
+  width: 12rem;
+}
+[id$="name"] {
+  margin-left: 3.1rem;
+}
+[id$="desc"] {
+  margin-left: 0.9rem;
+}
+[id$="price"] {
+  margin-left: 3.6rem;
+}
+[id$="file"] {
+  margin-left: 0.9rem;
+  height: 28px;
+}
+.grid-table {
+  background-color: #2b436f;
+  color: white;
+  text-align: center;
+  margin-left: 8rem;
+}
+.grid-table tr th {
+  position: relative;
+  top: -5px;
+}
+.grid-data-tr td:first-child {
+  color: #bcc8d2;
+}
