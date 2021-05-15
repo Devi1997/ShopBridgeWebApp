@@ -3,17 +3,20 @@ import { Button, Row, Col, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import Service from "./Service";
+import SaveItems from "./SaveItems";
 
 function LoginForm() {
   const [tbldata, setTbldata] = useState([]);
   const [reload, setReload] = useState(false);
+  const [item, setItem] = useState({});
+  const [isEditmode, setisEditmode] = useState(false);
 
   const service = new Service();
 
   useEffect(() => {
     service.getItems().then(
       (json) => {
-        setTbldata(json);
+        if (json) setTbldata(json);
       },
       (error) => {
         console.log(error);
@@ -31,61 +34,16 @@ function LoginForm() {
       <Row>
         <Col></Col>
         <Col xs="auto">
-          {/* <form onSubmit={(e)=>{
-            let form=e.target
-            let data={name:form.name.va
-          }}>
-            <div className="form-group">
-              <label >
-                <b>Name</b>
-              </label>
-              <input type="text" name="name" id="name" />
-            </div>
-            <div className="form-group">
-              <label >
-                <b>Description</b>
-              </label>
-              <input type="text" name="desc" id="desc" />
-            </div>
-            <div className="form-group">
-              <label >
-                <b>Price</b>
-              </label>
-              <input type="text" name="price" id="price" />
-            </div>
-            <Button variant="primary" type="submit">Save</Button>
-          </form> */}
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-              let form = e.target;
-              let data = {
-                name: form.formBasicName.value,
-                Description: form.formBasicDescription.value,
-                price: form.formBasicPrice.value,
-              };
-              service.addItems(data).then(() => {
-                setReload(!reload);
-              });
-              console.log(form);
-            }}
-          >
-            <Form.Group controlId="formBasicName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" />
-            </Form.Group>
-            <Form.Group controlId="formBasicDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control type="text" />
-            </Form.Group>
-            <Form.Group controlId="formBasicPrice">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="text" />
-              <Button variant="primary" type="submit">
-                Save
-              </Button>
-            </Form.Group>
-          </Form>
+          {isEditmode ? (
+            <SaveItems
+              setReload={setReload}
+              reload={reload}
+              item={item}
+              isEditmode={isEditmode}
+            />
+          ) : (
+            <SaveItems setReload={setReload} reload={reload} />
+          )}
         </Col>
         <Col></Col>
       </Row>
@@ -113,7 +71,13 @@ function LoginForm() {
                     });
                   }}
                 />
-                <FontAwesomeIcon icon={faPencilAlt} />
+                <FontAwesomeIcon
+                  icon={faPencilAlt}
+                  onClick={() => {
+                    setisEditmode(true);
+                    setItem(item);
+                  }}
+                />
               </td>
             </tr>
           );
