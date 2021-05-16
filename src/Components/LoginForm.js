@@ -51,7 +51,7 @@ function LoginForm() {
         <h2>List</h2>
         <h2>Inventory Items</h2>
       </div>
-      <table width="100%">
+      <table width="80%">
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>

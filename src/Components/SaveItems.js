@@ -6,13 +6,13 @@ function SaveItems(props) {
   const [name, setName] = useState("");
   const [Description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  //   const [reload, setReload] = useState(false);
   const service = new Service();
   useEffect(() => {
     setName(props.item ? props.item.name : "");
     setDescription(props.item ? props.item.Description : "");
     setPrice(props.item ? props.item.price : "");
   }, [props]);
+
   return (
     <Form
       onSubmit={(e) => {
@@ -26,12 +26,25 @@ function SaveItems(props) {
         props.setReload(!props.reload);
         if (props.isEditmode) {
           service.editItems(props.item.id, data);
+          props.item.name = "";
+          props.item.Description = "";
+          props.item.price = "";
         } else {
-          service.addItems(data).then(() => {
-            setName("");
-            setDescription("");
-            setPrice("");
-          });
+          if (name != "" && Description != "" && price != "") {
+            service.addItems(data).then(() => {
+              setName("");
+              setDescription("");
+              setPrice("");
+            });
+          }
+        }
+
+        if (name == "") {
+          alert("Please enter name");
+        } else if (Description == "") {
+          alert("Please enter the description");
+        } else if (price == "") {
+          alert("Please enter the Price");
         }
       }}
     >
@@ -65,9 +78,11 @@ function SaveItems(props) {
           }}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Save
-      </Button>
+      <div>
+        <Button variant="primary" type="submit">
+          Save
+        </Button>
+      </div>
     </Form>
   );
 }

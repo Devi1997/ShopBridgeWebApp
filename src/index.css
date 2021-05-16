@@ -28,9 +28,15 @@
   font-size: 1.1em;
   padding-left: 8rem;
   padding-bottom: 10px;
-  border-bottom: 1px solid #e7eaee;
+
   color: #788586;
   font-weight: 400;
+}
+.form-inner h2:nth-child(2) {
+  border-bottom: 1px solid #e7eaee;
+}
+.form-inner-second-grp h2:nth-child(2) {
+  border: none;
 }
 /* input {
   height: 25px;
@@ -89,4 +95,23 @@
 }
 .grid-data-tr td:first-child {
   color: #bcc8d2;
+}
+table {
+  cursor: pointer;
+  margin-left: 8rem;
+}
+table th {
+  background: #2b436f;
+  color: white;
+  padding: 12px 8px;
+}
+label {
+  font-weight: bold;
+}
+table tr {
+  border-bottom: 1px solid #e7eaee;
+  height: 40px;
+}
+table tr:hover {
+  background: #f9f9f9;
 }
